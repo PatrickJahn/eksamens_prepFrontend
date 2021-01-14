@@ -39,6 +39,143 @@ ul.header li a:hover:not(.active) {
   background-color: black;
 }
 
+.categories{
+margin-left: 25px;
+margin-right: 25px;
+}
+
+.categories h2 {
+  margin-left: 15px;
+  margin-bottom: 0px;
+ 
+}
+
+.categoryBox {
+  display: inline-block;
+  width: 15%;
+  height: 10%;
+  margin: 10px;
+ 
+  
+  border-style: solid;
+  border-color: #3333;
+ border-width: 1px;
+background-color: white;
+ text-align: center;
+ cursor: pointer;
+ text-decoration: none;
+ color: black;
+  
+transition: ease-in-out 0.3s;
+}
+.categoryBox:hover {
+  box-shadow: 0px 0px 6px #333;
+  transform: scale(1.2);
+}
+.categoryBox img {
+  
+  width: 100%
+
+}
+.categoryBox h3 {
+  font-size: 1.3vw;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+ *{box-sizing: border-box;} 
+.recipes {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+.recipesBox {
+  flex: 25%;
+ max-width: 25%;
+ padding: 0 4px 8px;
+ position: relative;
+ text-align: center;
+ transition: 0.2s;
+
+}
+
+.recipesBox:hover {
+  box-shadow: 0 0 6px #333;
+ 
+  transform: scale(1.2);
+  z-index: 21;
+  padding: 0px 0px 0px 0px;
+}
+
+.recipesBox img {
+  max-width: 100%;
+  height: auto;
+
+  vertical-align: middle;
+cursor: pointer;
+
+}
+
+.recipesBox h3 {
+  position: absolute;
+display: block;
+  z-index: 22;
+  color: aliceblue;
+  top: 50%;
+  left: 50%;
+  width: 85%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 1.7vw;
+  
+}
+.recipesH{
+  text-align: center;
+}
+
+.saveIcon{
+ position: absolute;
+ display: block;
+ top: 12%;
+ right: 12%;
+ border-radius: 50%;
+ background-color: rgba(206, 107, 15, 0.63);
+ height: 40px;
+  width: 40px;
+ z-index: 42;
+ transition: 0.2s;
+}
+.saveIcon:hover{
+ cursor: copy;
+  background-color: rgb(230, 126, 28);
+  
+ }
+.infoH{
+  text-align: center;
+}
+.recipeInfoBox{
+ margin: 20px;
+}
+.recipeInfoBox img {
+float: left;
+margin-right: 20px;
+width: 30%;
+box-shadow: 0 0 6px #333;
+transition: 2s;
+}
+
+.recipeInfoBox h4 {
+ margin-right: 100px;
+}
+
+
+@media (max-width: 800px) {
+  .recipesBox {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+/* OLD STUFF DOWN HERE */
 .card {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);

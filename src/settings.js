@@ -1,3 +1,3 @@
-const URL = "https://patrickcph.dk/ca3"
+const URL = "https://patrickcph.dk/exam_prep"
  
 export default URL;

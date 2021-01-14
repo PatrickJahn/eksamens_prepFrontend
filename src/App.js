@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import facade from "./apiFacade";
 import StarWars from "./starWars";
 import WelcomePage from "./welcomePage";
-import { Switch, Route, NavLink } from "react-router-dom";
+import { Switch, Route, NavLink, useLocation } from "react-router-dom";
 import LikedMovies from "./likedMovies";
+import Recipes from "./recipes";
+import Recipe from "./recipe";
+import SavedMeals from "./savedMeals";
+
 
 function Header({loggedIn}) {
   return (
@@ -16,22 +20,17 @@ function Header({loggedIn}) {
         </li>
         <li>
           <NavLink activeClassName="selected" to="/LoginPage">
-            Login
+           {loggedIn ? (<> Log out</>) : (<>Login</>) } 
           </NavLink>
         </li>
         {loggedIn && (
           <li>
-          <NavLink activeClassName="selected" to="/StarwarsPage">
-            Star Wars
+          <NavLink activeClassName="selected" to="/savedmeals">
+            Saved meals
           </NavLink>
         </li>
         )}
-         {loggedIn && (
-         <li>
-          <NavLink activeClassName="selected" to="/LikedMovies">
-            Liked Movies
-          </NavLink>
-        </li>)}
+        
   
       </ul>
     </div>
@@ -73,8 +72,45 @@ function StarWarsPage() {
 
 
 function Home() {
+
+  const [food, setFood] = useState([])
+  const [drinks, setDrinks] = useState([])
+  useEffect(() => {
+    facade.fetchCategories().then((data) => {
+     setFood(data.food)
+     setDrinks(data.drink)
+   
+    })
+  },[])
   return (
-    <WelcomePage/>
+    <div className="categories">
+      <h2>Food</h2>
+      {food.map((item) =>{
+        return (
+          <NavLink exact activeClassName="" to={"/food/"+ item.strCategory}>
+           
+          <div className="categoryBox">
+          <img src={item.strCategoryThumb}></img>
+          <h3>{item.strCategory}</h3>
+          </div>
+          
+          </NavLink>
+            )
+      })}
+   
+   <h2>Drinks</h2>
+   {drinks.map((item) => {
+     return (
+      <NavLink exact activeClassName="" to={"/drink/"+ item.strCategory}>
+      <div className="categoryBox">
+      <h3>{item.strCategory}</h3>
+      </div>
+      </NavLink>
+       )
+   })}
+    </div>
+
+   // <WelcomePage/>
     );
 }
 
@@ -174,6 +210,21 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route  path="/food/">
+          <Recipes kind="food" category={useLocation().pathname}/>
+        </Route>
+        <Route  path="/drink/">
+          <Recipes kind="drink" category={useLocation().pathname}/>
+        </Route>
+        <Route  path="/recipe/meal">
+          <Recipe kind="meal" foodid={useLocation().pathname}/>
+        </Route>
+        <Route  path="/recipe/drink">
+          <Recipe kind="drink" foodid={useLocation().pathname}/>
+        </Route>
+        <Route  path="/savedmeals/">
+          <SavedMeals />
         </Route>
         <Route exact path="/LoginPage">
           <LoginPage setLoggedIn={setLoggedIn} loggedIn={loggedIn} />

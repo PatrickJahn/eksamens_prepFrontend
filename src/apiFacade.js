@@ -19,6 +19,34 @@ function apiFacade() {
         setToken(res.token);
       });
   };
+
+
+const fetchCategories = () => {
+  const options = makeOptions("GET", true);
+  return fetch(URL + "/api/food/categoriesp").then(handleHttpErrors)
+}
+
+const fetchRecipes = (category, kind) => {
+  const options = makeOptions("GET", true);
+  return fetch(URL + "/api/food/categories/" + kind + "/" + category).then(handleHttpErrors)
+}
+
+const fetchRecipe = (id) => {
+  const options = makeOptions("GET", true);
+  console.log(id)
+  return fetch(URL + "/api/food/" + id).then(handleHttpErrors)
+}
+const saveRecipe = (id) => {
+  const options = makeOptions("POST", true, id);
+  console.log(id)
+  return fetch(URL + "/api/info/savemeal", options).then(handleHttpErrors)
+}
+
+const fetchSavedMeals = (id) => {
+  const options = makeOptions("GET", true);
+  console.log(id)
+  return fetch(URL + "/api/info/savedmeals", options).then(handleHttpErrors)
+}
   const fetchData = (role) => {
     const options = makeOptions("GET", true); //True add's the token
     return fetch(URL + "/api/info/" + role, options).then(handleHttpErrors);
@@ -49,6 +77,7 @@ function apiFacade() {
     };
     if (addToken && loggedIn()) {
       opts.headers["x-access-token"] = getToken();
+      console.log(getToken())
     }
     if (body) {
       opts.body = JSON.stringify(body);
@@ -80,6 +109,11 @@ function apiFacade() {
     fetchStarWarsData,
     likeMovie,
     dislikeMovie,
+    fetchCategories,
+    fetchRecipes,
+    fetchRecipe,
+    saveRecipe,
+    fetchSavedMeals
   };
 }
 const facade = apiFacade();
